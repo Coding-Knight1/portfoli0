@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Next.js Portfolio - Shreyas GN
 
-## Getting Started
+A high-performance, visually immersive personal portfolio website built with **Next.js 16**, **Tailwind CSS v4**, and **Framer Motion**.  
+Designed with a focus on premium aesthetics, smooth interactivity, and deep dark-mode visuals inspired by top-tier Dribbble designs.
 
-First, run the development server:
+![Portfolio Preview](./public/preview.png)   
+*(Note: Add a screenshot of your hero section here named `preview.png` in the public folder)*
+
+## ✨ Key Features
+
+### 🎨 **Visual Experience**
+-   **Cinematic Dark Theme**: A deep, cohesive dark palette (`#0f0f16`) with ambient glows and a global **noise texture** overlay for film-grain aesthetic.
+-   **Immersive Hero Section**: Featuring **mouse-parallax backgrounds** where ambient lights move in 3D space relative to your cursor.
+-   **Glassmorphism**: Extensive use of backdrop blurs and translucent layers for cards and navigation.
+
+### 🚀 **UI/UX Interactions**
+-   **Lenis Smooth Scroll**: Buttery soft inertial scrolling for a premium browsing feel.
+-   **Magnetic Buttons**: Interactive elements (CTA, Navigation, Social Links) that physically "pull" toward your cursor using spring physics.
+-   **Spotlight Cards**: The **Skills** section features cards with a radial gradient glow that tracks your mouse cursor precisely within the card boundaries.
+-   **Project Modals**: Seamless layout transitions using `framer-motion`'s `layoutId` to expand project cards into full-screen details without page reloads.
+
+### 🛠️ **Technical Highlights**
+-   **Framework**: [Next.js 16 (App Router)](https://nextjs.org/) with Turbopack.
+-   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (using the new CSS-first configuration).
+-   **Animations**: [Framer Motion](https://www.framer.com/motion/) for complex state transitions and springs.
+-   **Performance**: Optimized for speed, with zero layout shift and `react-compiler` enabled.
+-   **Type Safety**: Fully typed with **TypeScript**.
+
+---
+
+## 🏗️ Getting Started
+
+### Prerequisites
+-   Node.js 18+ installed.
+
+### Installation
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/yourusername/portfolio.git
+    cd portfolio
+    ```
+
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    # This installs next, react, framer-motion, lenis, lucide-react, etc.
+    ```
+
+3.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+
+4.  Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+├── app/
+│   ├── layout.tsx       # Root layout with SmoothScroll, Noise, and Global Styles
+│   ├── page.tsx         # Main single-page scrollable view
+│   ├── globals.css      # Global styles, variables, and Tailwind imports
+│   └── ...
+├── components/
+│   ├── sections/        # Major page sections (Hero, About, Skills, Projects, Contact)
+│   ├── ui/              # Reusable UI atoms
+│   │   ├── Magnetic.tsx      # Magnetic button wrapper
+│   │   ├── SpotlightCard.tsx # Mouse-tracking glow card
+│   │   ├── Reveal.tsx        # Scroll animation wrapper
+│   │   └── ...
+│   └── Navigation.tsx   # Floating glass navbar
+└── lib/                 # Utilities
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project is optimized for deployment on **Netlify** or **Vercel**.
 
-## Learn More
+1.  Push your code to a Git repository (GitHub/GitLab).
+2.  Connect your repository to Netlify/Vercel.
+3.  The build settings should be auto-detected:
+    -   **Build Command**: `npm run build`
+    -   **Output Directory**: `.next`
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is open source and available under the [MIT License](LICENSE).
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2026 Shreyas GN.

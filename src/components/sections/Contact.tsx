@@ -2,13 +2,51 @@
 
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { Github, Linkedin, Mail, Code } from "lucide-react";
-import Link from "next/link";
+import { Github, Linkedin, Mail, Code, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { useState, FormEvent } from "react";
 
 export function Contact() {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        message: ""
+    });
+    const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    const validate = () => {
+        const newErrors: { [key: string]: string } = {};
+        if (!formData.name.trim()) newErrors.name = "Name is required";
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email address";
+        }
+        if (!formData.message.trim()) newErrors.message = "Message is required";
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        if (!validate()) return;
+
+        setStatus('submitting');
+
+        // Simulate network request
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        setStatus('success');
+        setFormData({ name: "", email: "", message: "" });
+
+        // Reset success message after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000);
+    };
+
     return (
         <div id="contact" className="relative bg-dark-bg text-white py-24 overflow-hidden">
-            {/* Marquee */}
+            {/* Marquee - Styles are in globals.css */}
             <div className="relative flex overflow-x-hidden mb-24 pointer-events-none opacity-10 select-none">
                 <div className="animate-marquee whitespace-nowrap py-4">
                     <span className="text-[10rem] md:text-[14rem] font-bold mx-4">LET&apos;S WORK TOGETHER</span>
@@ -34,15 +72,17 @@ export function Contact() {
 
                     <Reveal delay={0.2} className="flex gap-6">
                         {[
-                            { icon: Github, href: "https://github.com" },
-                            { icon: Linkedin, href: "https://linkedin.com" },
-                            { icon: Code, href: "https://hackerrank.com" }
+                            { icon: Github, href: "https://github.com/Shreyas-GN" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/in/shreyas-gn" },
+                            { icon: Code, href: "https://www.hackerrank.com/profile/shreyasgn11" }
                         ].map((social, i) => (
                             <a
                                 key={i}
                                 href={social.href}
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center p-4 bg-white/5 rounded-full hover:bg-accent hover:scale-110 transition-all duration-300 group"
+                                aria-label="Social Link"
                             >
                                 <social.icon className="w-6 h-6 text-gray-300 group-hover:text-white" />
                             </a>
@@ -52,14 +92,82 @@ export function Contact() {
 
                 <div className="md:pt-4">
                     <Reveal delay={0.3}>
-                        <a
-                            href="mailto:shreyas@example.com"
-                            className="block p-12 bg-white/5 rounded-3xl border border-white/10 hover:border-accent hover:bg-white/10 transition-all group text-center"
-                        >
-                            <Mail className="w-12 h-12 text-gray-400 mx-auto mb-6 group-hover:text-accent transition-colors" />
-                            <h3 className="text-2xl font-semibold mb-2">Send an Email</h3>
-                            <p className="text-gray-400 group-hover:text-white transition-colors">shreyas@example.com</p>
-                        </a>
+                        <form onSubmit={handleSubmit} className="bg-white/5 p-8 rounded-3xl border border-white/10 space-y-6">
+                            {status === 'success' ? (
+                                <div className="flex flex-col items-center justify-center py-12 text-center animate-in fade-in duration-300">
+                                    <div className="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-4">
+                                        <CheckCircle className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                                    <p className="text-gray-400">Thanks for reaching out. I&apos;ll get back to you soon.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="space-y-2">
+                                        <label htmlFor="name" className="text-sm font-medium text-gray-300 ml-1">Name</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            value={formData.name}
+                                            onChange={(e) => {
+                                                setFormData({ ...formData, name: e.target.value });
+                                                if (errors.name) setErrors({ ...errors, name: "" });
+                                            }}
+                                            className={`w-full px-4 py-3 bg-white/5 border ${errors.name ? 'border-red-500/50 focus:border-red-500' : 'border-white/10 focus:border-accent'} rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-accent/50 transition-all`}
+                                            placeholder="John Doe"
+                                            disabled={status === 'submitting'}
+                                        />
+                                        {errors.name && <p className="text-red-400 text-xs ml-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.name}</p>}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label htmlFor="email" className="text-sm font-medium text-gray-300 ml-1">Email</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            value={formData.email}
+                                            onChange={(e) => {
+                                                setFormData({ ...formData, email: e.target.value });
+                                                if (errors.email) setErrors({ ...errors, email: "" });
+                                            }}
+                                            className={`w-full px-4 py-3 bg-white/5 border ${errors.email ? 'border-red-500/50 focus:border-red-500' : 'border-white/10 focus:border-accent'} rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-accent/50 transition-all`}
+                                            placeholder="john@example.com"
+                                            disabled={status === 'submitting'}
+                                        />
+                                        {errors.email && <p className="text-red-400 text-xs ml-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.email}</p>}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label htmlFor="message" className="text-sm font-medium text-gray-300 ml-1">Message</label>
+                                        <textarea
+                                            id="message"
+                                            value={formData.message}
+                                            onChange={(e) => {
+                                                setFormData({ ...formData, message: e.target.value });
+                                                if (errors.message) setErrors({ ...errors, message: "" });
+                                            }}
+                                            rows={4}
+                                            className={`w-full px-4 py-3 bg-white/5 border ${errors.message ? 'border-red-500/50 focus:border-red-500' : 'border-white/10 focus:border-accent'} rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-accent/50 transition-all resize-none`}
+                                            placeholder="How can I help you?"
+                                            disabled={status === 'submitting'}
+                                        />
+                                        {errors.message && <p className="text-red-400 text-xs ml-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {errors.message}</p>}
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        disabled={status === 'submitting'}
+                                        className="w-full py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
+                                    >
+                                        {status === 'submitting' ? (
+                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        ) : (
+                                            <>Send Message <Send className="w-4 h-4" /></>
+                                        )}
+                                    </button>
+                                </>
+                            )}
+                        </form>
                     </Reveal>
                 </div>
             </div>
@@ -67,8 +175,6 @@ export function Contact() {
             <div className="mt-24 text-center border-t border-white/10 pt-8 text-gray-500 text-sm">
                 <p>© {new Date().getFullYear()} Shreyas GN.</p>
             </div>
-
-
         </div>
-    )
+    );
 }

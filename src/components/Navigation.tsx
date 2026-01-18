@@ -8,6 +8,7 @@ import { Magnetic } from "@/components/ui/Magnetic";
 const navItems = [
     { name: "About", path: "about" },
     { name: "Skills", path: "skills" },
+    { name: "Certifications", path: "certifications" },
     { name: "Projects", path: "projects" },
     { name: "Contact", path: "contact" },
 ];

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, PT_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 
@@ -8,10 +8,9 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const ptMono = PT_Mono({
-  weight: "400",
+const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-pt-mono",
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${ptMono.variable} font-sans bg-[#fcfcfb] text-[#111111] antialiased selection:bg-[#5e5ce6] selection:text-white`}
+        className={`${inter.variable} ${jetBrainsMono.variable} font-mono bg-[#fcfcfb] text-[#111111] antialiased selection:bg-[#5e5ce6] selection:text-white`}
       >
         <Noise />
         <SmoothScroll>

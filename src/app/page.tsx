@@ -1,6 +1,6 @@
-import { Section } from "@/components/ui/Section";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
+import { Certifications } from "@/components/sections/Certifications";
 import { Projects } from "@/components/sections/Projects";
 import { Resume } from "@/components/sections/Resume";
 import { Contact } from "@/components/sections/Contact";
@@ -16,6 +16,7 @@ export default function Home() {
       <div className="">
         <About />
         <Skills />
+        <Certifications />
         <Projects />
         <Resume />
       </div>

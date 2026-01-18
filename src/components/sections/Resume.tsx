@@ -65,19 +65,7 @@ export function Resume() {
                     </div>
                 </Reveal>
 
-                <Reveal delay={0.4}>
-                    <div className="relative">
-                        <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-gray-600 border-4 border-dark-bg shadow-sm" />
-                        <h3 className="text-xl font-bold text-white mb-4">Certifications</h3>
-                        <div className="flex flex-wrap gap-3">
-                            {["Git & GitHub", "Python Fundamentals", "Agile Methodologies"].map(cert => (
-                                <span key={cert} className="px-4 py-2 bg-white/5 text-gray-300 rounded-lg text-sm border border-white/10 shadow-sm font-medium hover:bg-white/10 transition-colors">
-                                    {cert}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </Reveal>
+
             </div>
         </Section>
     )
