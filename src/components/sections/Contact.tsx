@@ -70,21 +70,24 @@ export function Contact() {
                         </p>
                     </Reveal>
 
-                    <Reveal delay={0.2} className="flex gap-6">
+                    <Reveal delay={0.2} className="flex flex-col gap-4">
                         {[
-                            { icon: Github, href: "https://github.com/Shreyas-GN" },
-                            { icon: Linkedin, href: "https://www.linkedin.com/in/shreyas-gn" },
-                            { icon: Code, href: "https://www.hackerrank.com/profile/shreyasgn11" }
+                            { icon: Github, href: "https://github.com/Shreyas-GN", label: "GitHub" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/in/shreyas-gn", label: "LinkedIn" },
+                            { icon: Code, href: "https://www.hackerrank.com/profile/shreyasgn11", label: "HackerRank" }
                         ].map((social, i) => (
                             <a
                                 key={i}
                                 href={social.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center p-4 bg-white/5 rounded-full hover:bg-accent hover:scale-110 transition-all duration-300 group"
-                                aria-label="Social Link"
+                                className="group flex items-center gap-4 px-6 py-4 bg-white/5 border border-white/10 rounded-full hover:bg-accent hover:border-accent hover:scale-105 hover:shadow-[0_0_20px_-5px_rgba(77,47,178,0.5)] transition-all duration-300 w-fit"
+                                aria-label={social.label}
                             >
-                                <social.icon className="w-6 h-6 text-gray-300 group-hover:text-white" />
+                                <social.icon className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
+                                <span className="text-gray-300 group-hover:text-white font-medium tracking-wide transition-colors">
+                                    {social.label}
+                                </span>
                             </a>
                         ))}
                     </Reveal>
@@ -157,7 +160,7 @@ export function Contact() {
                                     <button
                                         type="submit"
                                         disabled={status === 'submitting'}
-                                        className="w-full py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
+                                        className="w-full py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-full tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
                                     >
                                         {status === 'submitting' ? (
                                             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
