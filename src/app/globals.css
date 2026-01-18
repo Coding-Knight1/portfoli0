@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+  --dark-bg: #0f0f16;
+  --dark-fg: #ffffff;
+  --accent: #5e5ce6;
+  --muted: #888888;
+}
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-pt-mono);
+
+  --color-canvas: var(--background);
+  --color-ink: var(--foreground);
+  --color-dark-bg: var(--dark-bg);
+  --color-dark-fg: var(--dark-fg);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--dark-fg);
+  font-family: var(--font-sans);
+}
+
+.dark-section {
+  background-color: var(--dark-bg);
+  color: var(--dark-fg);
+}
+
+/* Utilities for scrollbar hiding if needed or smooth functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Marquee Animations */
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee2 {
+  animation: marquee2 25s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee2 {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
